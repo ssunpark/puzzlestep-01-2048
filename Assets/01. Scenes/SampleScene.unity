@@ -496,7 +496,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -640,7 +640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ebd418c6fd24c3d8b2e264f73f269a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellSize: 1.2
+  cellSize: 200
+  tilePrefab: {fileID: 2461495404594793216, guid: 655d17a7871b246cdba5871914ed8a4e, type: 3}
+  gridParent: {fileID: 1082886230}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
