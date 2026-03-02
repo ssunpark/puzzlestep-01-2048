@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public class GridManager : MonoBehaviour
 {
@@ -8,9 +9,15 @@ public class GridManager : MonoBehaviour
 
     void Start()
     {
+    	Debug.Log("--- [시스템] 2048 게임 시작 ---");
         InitializeGrid();
         SpawnTile();
         SpawnTile();
+        
+        Debug.Log($"--- [테스트] 보드 좌상단 [0,0] 좌표: {GetWorldPosition(0, 0)}");
+        Debug.Log($"--- [테스트] 보드 우하단 [3,3] 좌표: {GetWorldPosition(3, 3)}");
+        
+        PrintGrid();
     }
 
     void Update()
@@ -26,6 +33,7 @@ public class GridManager : MonoBehaviour
         // 변화가 있을 때만 스폰
         if (moved)
         {
+        	Debug.Log("<color=yellow>타일 이동 및 병합 발생!</color>");
             SpawnTile();
             PrintGrid(); 
         }
@@ -35,6 +43,7 @@ public class GridManager : MonoBehaviour
 
     public bool MoveUp()
     {
+    	Debug.Log("위로 이동");
         bool isChanged = false;
         for (int c = 0; c < 4; c++)
         {
@@ -62,6 +71,7 @@ public class GridManager : MonoBehaviour
 
     public bool MoveDown()
     {
+    	Debug.Log("아래로 이동");
         bool isChanged = false;
         for (int c = 0; c < 4; c++)
         {
@@ -89,6 +99,7 @@ public class GridManager : MonoBehaviour
 
     public bool MoveLeft()
     {
+        Debug.Log("왼쪽으로 이동");
         bool isChanged = false;
         for (int r = 0; r < 4; r++)
         {
@@ -116,6 +127,7 @@ public class GridManager : MonoBehaviour
 
     public bool MoveRight()
     {
+    	Debug.Log("오른쪽으로 이동");
         bool isChanged = false;
         for (int r = 0; r < 4; r++)
         {
@@ -148,6 +160,7 @@ public class GridManager : MonoBehaviour
         for (int r = 0; r < 4; r++)
             for (int c = 0; c < 4; c++)
                 grid[r, c] = 0;
+        Debug.Log("--- [시스템] 그리드 데이터 초기화 완료 (전체 0) ---");
     }
 
     private void SpawnTile()
@@ -161,7 +174,15 @@ public class GridManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, emptyCells.Count);
             Vector2Int chosenCell = emptyCells[randomIndex];
-            grid[chosenCell.x, chosenCell.y] = Random.value < 0.9f ? 2 : 4;
+        
+            // 1. 먼저 생성할 값을 변수(spawnValue)에 저장합니다.
+            int spawnValue = Random.value < 0.9f ? 2 : 4;
+        
+            // 2. 배열에 값을 대입합니다.
+            grid[chosenCell.x, chosenCell.y] = spawnValue;
+
+            // 3. 로그 출력 시 저장해둔 변수를 사용합니다.
+            Debug.Log($"<color=cyan>[생성]</color> 좌표 [{chosenCell.x}, {chosenCell.y}]에 숫자 '{spawnValue}' 배달 완료");
         }
     }
 
